@@ -23,7 +23,11 @@ public class EnemyBehaviour : MonoBehaviour {
 	
 	private int fixedFrame;
 	
-	void Start() {
+	//void Start() {
+	//	Setup();
+	//}
+
+	public void Setup() {
 		randomSpeed = Random.Range(movementBounds.min, movementBounds.max);
 
 		startingPoint = new Vector2(
@@ -35,6 +39,8 @@ public class EnemyBehaviour : MonoBehaviour {
 		
 		currentShotDelay = Random.Range(shotDelay.min, shotDelay.max);
 	}
+	
+	
 
 	void Update() {
 		transform.position = new Vector2(
@@ -46,9 +52,16 @@ public class EnemyBehaviour : MonoBehaviour {
 		fixedFrame++;
 		
 		if (fixedFrame >= currentShotDelay) {
-			GameObject bullet = BulletManager.instance.GetBullet(bulletSpawnPoint.position);
+			GameObject bullet = ObjectPool.instance.GetEnemyBullet(bulletSpawnPoint.position);
 			fixedFrame = 0;
 			currentShotDelay = Random.Range(shotDelay.min, shotDelay.max);
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.CompareTag("PlayerBullet")) {
+			ObjectPool.instance.ReturnEnemy(gameObject);
+			GameController.instance.AddScore(25);
 		}
 	}
 }

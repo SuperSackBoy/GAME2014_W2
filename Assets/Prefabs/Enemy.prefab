@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6605612101045296925}
   - component: {fileID: 7695854292359131646}
   - component: {fileID: 6835384365558361708}
+  - component: {fileID: 5744167761626055834}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +117,7 @@ MonoBehaviour:
     max: 2
   startingYBounds:
     min: 1.5
-    max: 5
+    max: 4.5
   shotDelay:
     min: 25
     max: 100
@@ -175,6 +176,33 @@ PolygonCollider2D:
       - {x: 0.10508974, y: -0.376796}
       - {x: 0.26022846, y: -0.42467743}
   m_UseDelaunayMesh: 1
+--- !u!50 &5744167761626055834
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7316143634138620053}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
 --- !u!1 &8630712016361752862
 GameObject:
   m_ObjectHideFlags: 0

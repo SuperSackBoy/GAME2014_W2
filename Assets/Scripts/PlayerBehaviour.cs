@@ -2,16 +2,23 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using Random = UnityEngine.Random;
 
 public class PlayerBehaviour : MonoBehaviour {
 	[SerializeField] private float horizontalForce;
 	[SerializeField] private Boundary bounds;
 	[SerializeField, Range(0f, 1f)] private float decay;
-
+	
+	[SerializeField] private Transform bulletSpawnPoint;
+	[SerializeField] private IntBoundary shotDelay;
+	
 	private Rigidbody2D rb;
+	private int fixedFrame;
+	private float currentShotDelay;
 
 	private void Start() {
 		rb = GetComponent<Rigidbody2D>();
+		currentShotDelay = Random.Range(shotDelay.min, shotDelay.max);
 	}
 
 	private float GetTouchDirection() {
@@ -59,5 +66,19 @@ public class PlayerBehaviour : MonoBehaviour {
 
 	private void FixedUpdate() {
 		rb.linearVelocity *= decay;
+		
+		fixedFrame++;
+		
+		if (fixedFrame >= currentShotDelay) {
+			GameObject bullet = ObjectPool.instance.GetPlayerBullet(bulletSpawnPoint.position);
+			fixedFrame = 0;
+			currentShotDelay = Random.Range(shotDelay.min, shotDelay.max);
+		}
+	}
+	
+	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.CompareTag("EnemyBullet")) {
+			GameController.instance.RemoveLife();
+		}
 	}
 }

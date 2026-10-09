@@ -1,16 +1,52 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 	[SerializeField] private RectTransform safeZoneContainer;
 	[SerializeField] private TMP_Text screenLabel;
+	[SerializeField] private TMP_Text livesLabel;
+	[SerializeField] private TMP_Text scoreLabel;
 	
-	
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
-	private void Start() {
+	[SerializeField] private int lives = 3;
+	private int score = 0;
+
+	public static GameController instance;
+
+	private void Awake() {
+		instance = this;
 	}
 
-	// Update is called once per frame
+	private void Start() {
+		UpdateScore();
+		UpdateLives();
+	}
+	
+	private void UpdateScore() {
+		scoreLabel.text = "Score: " + score;
+	}
+
+	private void UpdateLives() {
+		livesLabel.text = "Lives: " + lives;
+	}
+
+	public void RemoveLife() {
+		lives--;
+		if (lives <= 0) {
+			SceneManager.LoadScene("EndScreen");
+		}
+		else {
+			UpdateLives();
+		}
+	}
+
+	public void AddScore(int points) {
+		score += points;
+		UpdateScore();
+	}
+	
+	
 	private void Update() {
 		Vector2 screenSize = new Vector2(Screen.width, Screen.height); 
 		Vector2 minSafeArea = Screen.safeArea.min / screenSize;

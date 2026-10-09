@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviour {
+public class EnemyBulletBehaviour : MonoBehaviour {
 	[SerializeField] private float speed;
 	
 	[SerializeField] private Boundary screenBounds;
@@ -12,7 +12,7 @@ public class BulletBehaviour : MonoBehaviour {
 
 	private void CheckBounds() {
 		if (transform.position.y < screenBounds.min) {
-			BulletManager.instance.ReturnBullet(gameObject);
+			ObjectPool.instance.ReturnEnemyBullet(gameObject);
 		}
 	}
 	
@@ -23,7 +23,7 @@ public class BulletBehaviour : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("Player")) {
-			BulletManager.instance.ReturnBullet(gameObject);
+			ObjectPool.instance.ReturnEnemyBullet(gameObject);
 		}
 	}
 }
