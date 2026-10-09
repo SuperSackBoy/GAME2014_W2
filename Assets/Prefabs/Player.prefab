@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab623a23fbc596478cb7c1ab06c8e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBehaviour
-  horizontalForce: 1
+  horizontalForce: 500
   bounds:
     min: -2
     max: 2

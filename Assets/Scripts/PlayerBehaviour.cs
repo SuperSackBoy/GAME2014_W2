@@ -42,7 +42,7 @@ public class PlayerBehaviour : MonoBehaviour {
 	
 	private void Move() {
 		float x = GetTouchDirection();
-		rb.AddForce(new Vector2(x * horizontalForce, 0.0f));
+		rb.AddForce(new Vector2(x * horizontalForce * Time.deltaTime, 0.0f));
 	}
 
 
