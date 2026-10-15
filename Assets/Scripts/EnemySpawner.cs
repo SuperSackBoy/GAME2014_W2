@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour {
 		fixedFrame++;
 		
 		if (fixedFrame >= currentSpawnDelay) {
-			GameObject enemy = ObjectPool.instance.GetEnemy(new Vector3(0, 100, 0)); //sets its own position anyways, so set an offscreen pos for now
+			GameObject enemy = ObjectPool.Instance.GetEnemy(new Vector3(0, 100, 0)); //sets its own position anyways, so set an offscreen pos for now
 			enemy.GetComponent<EnemyBehaviour>()?.Setup();
 			fixedFrame = 0;
 			currentSpawnDelay = Random.Range(spawnRate.min, spawnRate.max);

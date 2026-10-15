@@ -70,7 +70,7 @@ public class PlayerBehaviour : MonoBehaviour {
 		fixedFrame++;
 		
 		if (fixedFrame >= currentShotDelay) {
-			GameObject bullet = ObjectPool.instance.GetPlayerBullet(bulletSpawnPoint.position);
+			GameObject bullet = ObjectPool.Instance.GetBullet(bulletSpawnPoint.position, BulletType.Player);
 			fixedFrame = 0;
 			currentShotDelay = Random.Range(shotDelay.min, shotDelay.max);
 		}

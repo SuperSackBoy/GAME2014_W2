@@ -52,7 +52,7 @@ public class EnemyBehaviour : MonoBehaviour {
 		fixedFrame++;
 		
 		if (fixedFrame >= currentShotDelay) {
-			GameObject bullet = ObjectPool.instance.GetEnemyBullet(bulletSpawnPoint.position);
+			GameObject bullet = ObjectPool.Instance.GetBullet(bulletSpawnPoint.position, BulletType.Enemy);
 			fixedFrame = 0;
 			currentShotDelay = Random.Range(shotDelay.min, shotDelay.max);
 		}
@@ -60,7 +60,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("PlayerBullet")) {
-			ObjectPool.instance.ReturnEnemy(gameObject);
+			ObjectPool.Instance.ReturnEnemy(gameObject);
 			GameController.instance.AddScore(25);
 		}
 	}
